@@ -36,3 +36,12 @@ export function convertToHtml(word: string) {
 
   return `<span style="color: ${color}">${word}</span>`;
 }
+
+export function getInnerHtml(value: string) {
+  if (!value) return '';
+  const valueToList: string[] = value
+    .split(' ')
+    .map((item) => convertToHtml(item));
+
+  return valueToList.join('&nbsp;');
+}
