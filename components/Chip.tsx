@@ -2,19 +2,19 @@ import React from 'react';
 import cn from 'classnames';
 
 type ChipProps = {
-  label: string;
+  children: JSX.Element | string;
   classname: string;
 };
 
-const Chip: React.FC<ChipProps> = ({ label, classname }) => {
+const Chip: React.FC<ChipProps> = ({ children, classname }) => {
   return (
     <span
       className={cn(
-        'px-2 py-1 rounded-full font-semibold text-sm flex align-center w-max m-0.5',
+        'px-2 py-1 rounded-full font-medium text-sm flex items-center align-center w-max m-0.5',
         classname
       )}
     >
-      {label}
+      {children}
     </span>
   );
 };
