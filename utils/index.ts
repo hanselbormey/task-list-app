@@ -1,4 +1,5 @@
 import { Tag } from '@/types/enums';
+import { BG_COLOR, COLOR, TXT_COLOR } from './constants';
 
 export const regexps = {
   url: /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi,
@@ -19,7 +20,7 @@ export function isEmail(text: string) {
   return found;
 }
 
-export function getColor(word: string) {
+export function getTag(word: string) {
   if (word.startsWith('@')) return Tag.MENTION;
   if (word.startsWith('#')) return Tag.HASHTAG;
   if (word.match(regexps.email)) return Tag.EMAIL;
@@ -27,14 +28,25 @@ export function getColor(word: string) {
   return '';
 }
 
+export const getColor = (tag: Tag) => COLOR[tag];
+
+export const getTextColor = (tag: Tag) => TXT_COLOR[tag];
+
+export const getBgColor = (tag: Tag) => BG_COLOR[tag];
+
 export function convertToHtml(word: string) {
   if (!word) return '';
 
-  const color = getColor(word);
+  let html = '';
 
-  if (!color) return `<span>${word}</span>`;
+  const tag = getTag(word);
 
-  return `<span style="color: ${color}">${word}</span>`;
+  if (tag) {
+    const color = getColor(tag);
+    html = `<span style="color: ${color}">${word}</span>`;
+  } else html = `<span>${word}</span>`;
+
+  return html;
 }
 
 export function getInnerHtml(value: string) {
