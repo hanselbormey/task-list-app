@@ -18,3 +18,6 @@ export const BG_COLOR = {
   email: 'bg-orange-100',
   link: 'bg-blue-100',
 };
+
+export const IMG_SRC =
+  'https://lh3.googleusercontent.com/a/AGNmyxaZZfocgMv0fqz6JuwqghSb6m8_5LhHsRMDKqKeBA=s96-c';
