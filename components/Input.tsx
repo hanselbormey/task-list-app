@@ -28,9 +28,23 @@ export default function Input({
   };
 
   useEffect(() => {
+    const div = document.getElementById('input');
+    if (div) {
+      div.addEventListener('keypress', (evt) => {
+        if (evt.key === 'Enter') {
+          evt.preventDefault();
+        }
+      });
+    }
+  });
+
+  useEffect(() => {
     if (!value) {
       const div = document.getElementById('div');
       if (div) {
+        debugger;
+        setInput('');
+        setDiv('');
         const placeholder = document.getElementById('placeholder');
         if (!placeholder) {
           const span = document.createElement('SPAN');
@@ -67,7 +81,6 @@ export default function Input({
           onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
             const inputContent = e.target.textContent || '';
             onChange(inputContent);
-
             const html = getInnerHtml(inputContent);
             setDiv(html);
           }}
