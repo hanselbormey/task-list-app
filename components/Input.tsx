@@ -42,7 +42,6 @@ export default function Input({
     if (!value) {
       const div = document.getElementById('div');
       if (div) {
-        debugger;
         setInput('');
         setDiv('');
         const placeholder = document.getElementById('placeholder');
