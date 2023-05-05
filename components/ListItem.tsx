@@ -3,6 +3,7 @@ import cn from 'classnames';
 import { Task } from '@/types/task';
 import { getBgColor, getTag, getTextColor } from '../utils';
 import Chip from './Chip';
+import IconTag from './IconTag';
 
 const ListItem = ({ item }: { item: Task }) => {
   return (
@@ -14,7 +15,9 @@ const ListItem = ({ item }: { item: Task }) => {
           const textColor = getTextColor(tag);
           const bgColor = getBgColor(tag);
           return (
-            <Chip key={index} classname={cn(bgColor, textColor)} label={e} />
+            <Chip key={index} classname={cn(bgColor, textColor, 'py-0.5')}>
+              <IconTag tag={tag} label={e} />
+            </Chip>
           );
         }
         return <span key={index}>{e}&nbsp;</span>;
