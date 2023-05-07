@@ -13,13 +13,13 @@ import {
 
 export default function Disclosure({
   children,
-  disabledButtons,
+  disabledActionButtons,
   formAction,
   onSubmit,
   onCancel,
 }: {
   children: JSX.Element;
-  disabledButtons: boolean;
+  disabledActionButtons: boolean;
   formAction: string;
   onSubmit(e: string): void;
   onCancel(): void;
@@ -41,12 +41,17 @@ export default function Disclosure({
         >
           {children}
           {open && (
-            <img
-              className="w-7 h-7 rounded-2xl opacity-50 object-cover"
-              src="man_avatar.jpg"
-              width={8}
-              height={8}
-            />
+            <button
+              disabled={disabledActionButtons}
+              className="disabled:opacity-50"
+            >
+              <img
+                className="w-7 h-7 rounded-2xl object-cover"
+                src="man_avatar.jpg"
+                width={8}
+                height={8}
+              />
+            </button>
           )}
         </div>
         {open ? (
@@ -54,7 +59,7 @@ export default function Disclosure({
             <div id="buttons-container" className="flex">
               <button
                 className="h-12 flex justify-evenly items-center rounded-md py-2 px-4 m-0.5 mr-4 md:mr-8 disabled:opacity-50 disabled:bg-gray-100 bg-gray-100 hover:bg-gray-200"
-                disabled={disabledButtons}
+                disabled={disabledActionButtons}
               >
                 <Maximize2 className="lg:mr-3 text-gray-600" />{' '}
                 <span className="lg:flex hidden disable: text-gray-500 font-medium">
@@ -63,7 +68,7 @@ export default function Disclosure({
               </button>
               <button
                 className="h-12 flex justify-evenly items-center md:border-2 rounded-md py-2 px-4 m-0.5 disabled:opacity-50 disabled:bg-gray-100 hover:bg-gray-200"
-                disabled={disabledButtons}
+                disabled={disabledActionButtons}
               >
                 <Calendar className="lg:mr-3 text-gray-400" />
                 <span className="lg:flex hidden text-gray-400 font-medium">
@@ -72,7 +77,7 @@ export default function Disclosure({
               </button>
               <button
                 className="h-12 flex justify-evenly items-center md:border-2 rounded-md py-2 px-4 m-0.5 disabled:opacity-50 disabled:bg-gray-100 hover:bg-gray-200"
-                disabled={disabledButtons}
+                disabled={disabledActionButtons}
               >
                 <Unlock className="lg:mr-3 text-gray-400" />{' '}
                 <span className="lg:flex hidden text-gray-400 font-medium">
@@ -81,7 +86,7 @@ export default function Disclosure({
               </button>
               <button
                 className="h-12 flex justify-evenly items-center md:border-2 rounded-md py-2 px-4 m-0.5 disabled:opacity-50 disabled:bg-gray-100 hover:bg-gray-200"
-                disabled={disabledButtons}
+                disabled={disabledActionButtons}
               >
                 <Sun className="lg:mr-3 text-gray-400" />{' '}
                 <span className="lg:flex hidden text-gray-400 font-medium">
@@ -90,7 +95,7 @@ export default function Disclosure({
               </button>
               <button
                 className="h-12 flex justify-evenly items-center md:border-2 rounded-md py-2 px-4 m-0.5 disabled:opacity-50 disabled:bg-gray-100 hover:bg-gray-200"
-                disabled={disabledButtons}
+                disabled={disabledActionButtons}
               >
                 <Disc className="lg:mr-3 text-gray-400" />{' '}
                 <span className="lg:flex hidden text-gray-400 font-medium">
@@ -99,7 +104,7 @@ export default function Disclosure({
               </button>
               <button
                 className="h-12 flex justify-evenly items-center md:border-2 rounded-md py-2 px-4 m-0.5 disabled:opacity-50 disabled:bg-gray-100 hover:bg-gray-200"
-                disabled={disabledButtons}
+                disabled={disabledActionButtons}
               >
                 <Trash2 className="lg:mr-3 text-gray-400" />{' '}
                 <span className="lg:flex hidden text-gray-400 font-medium">

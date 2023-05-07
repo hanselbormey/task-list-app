@@ -53,7 +53,7 @@ export default function Home() {
       <main className="mt-16">
         <Disclosure
           formAction={action}
-          disabledButtons={disabledButtons}
+          disabledActionButtons={disabledButtons}
           onSubmit={handleSubmit}
           onCancel={() => setValue('')}
         >
