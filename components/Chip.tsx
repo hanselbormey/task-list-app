@@ -3,15 +3,15 @@ import cn from 'classnames';
 
 type ChipProps = {
   children: JSX.Element | string;
-  classname: string;
+  className?: string;
 };
 
-const Chip: React.FC<ChipProps> = ({ children, classname }) => {
+const Chip: React.FC<ChipProps> = ({ children, className }) => {
   return (
     <span
       className={cn(
-        'px-2 py-1 rounded-full font-medium text-sm flex items-center align-center w-max m-0.5',
-        classname
+        'px-1  rounded-full font-medium text-sm flex items-center align-center w-max m-0.5',
+        className
       )}
     >
       {children}
