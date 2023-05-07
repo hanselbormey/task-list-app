@@ -11,6 +11,8 @@ import {
   X,
 } from 'react-feather';
 
+import { Action } from '@/types/enums';
+
 export default function Disclosure({
   children,
   disabledActionButtons,
@@ -120,20 +122,20 @@ export default function Disclosure({
                 Cancel
               </button>
               <>
-                {formAction === 'save' ? (
+                {formAction === Action.SAVE ? (
                   <button
                     id="save"
-                    onClick={() => onSubmit('save')}
+                    onClick={() => onSubmit(Action.SAVE)}
                     className="h-12 flex items-center rounded-md py-2 px-4 m-0.5 disabled:opacity-50 bg-blue-700 hover:bg-blue-800 text-white"
                   >
                     <Save className="flex lg:hidden lg:mr-3" />{' '}
                     <span className="font-medium hidden lg:flex">Save</span>
                   </button>
-                ) : formAction === 'add' ? (
+                ) : formAction === Action.ADD ? (
                   <button
                     id="add"
                     onClick={() => {
-                      onSubmit('add');
+                      onSubmit(Action.ADD);
                       setOpen(false);
                     }}
                     className="h-12 flex items-center rounded-md py-2 px-4 m-0.5 disabled:opacity-50 bg-blue-700 hover:bg-blue-800 text-white"
@@ -145,7 +147,7 @@ export default function Disclosure({
                   <button
                     id="ok"
                     onClick={() => {
-                      onSubmit('ok');
+                      onSubmit(Action.OK);
                       setOpen(false);
                     }}
                     className="h-12 flex items-center rounded-md py-2 px-4 m-0.5 disabled:opacity-50 bg-blue-700 hover:bg-blue-800 text-white"

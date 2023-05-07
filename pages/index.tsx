@@ -5,6 +5,7 @@ import List from '@/components/List';
 import Disclosure from '@/components/Disclosure';
 import { DataList } from '@/utils/mockData';
 import { Task } from '@/types/task';
+import { Action } from '@/types/enums';
 
 export default function Home() {
   const [value, setValue] = useState<string>('');
@@ -39,10 +40,10 @@ export default function Home() {
   };
 
   const handleSubmit = (act: string) => {
-    if (act === 'add') {
+    if (act === Action.ADD) {
       addItem(value);
     }
-    if (act === 'ok') {
+    if (act === Action.OK) {
       addItem('New task to do');
     }
   };
