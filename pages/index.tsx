@@ -49,9 +49,9 @@ export default function Home() {
   };
 
   return (
-    <div className="mt-4">
+    <div className="md:mt-4">
       <h1 className="text-3xl font-semibold text-blue-500">Task List App</h1>
-      <main className="mt-16">
+      <main className="mt-8 md:mt-16">
         <Disclosure
           formAction={action}
           disabledActionButtons={disabledButtons}
