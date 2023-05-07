@@ -34,8 +34,20 @@ export default function Disclosure({
   return (
     <div className={`${open ? 'border  rounded-md shadow-md' : ''}`}>
       <>
-        <div id="button" className="p-4" onClick={() => setOpen(true)}>
+        <div
+          id="button"
+          className="p-4 flex align-top justify-between"
+          onClick={() => setOpen(true)}
+        >
           {children}
+          {open && (
+            <img
+              className="w-7 h-7 rounded-2xl opacity-50 object-cover"
+              src="man_avatar.jpg"
+              width={8}
+              height={8}
+            />
+          )}
         </div>
         {open ? (
           <div id="panel" className="w-full flex justify-between border-t p-2">
@@ -115,7 +127,10 @@ export default function Disclosure({
                 ) : formAction === 'add' ? (
                   <button
                     id="add"
-                    onClick={() => onSubmit('add')}
+                    onClick={() => {
+                      onSubmit('add');
+                      setOpen(false);
+                    }}
                     className="h-12 flex items-center rounded-md py-2 px-4 m-0.5 disabled:opacity-50 bg-blue-700 hover:bg-blue-800 text-white"
                   >
                     <Plus className="flex lg:hidden  lg:mr-3" />{' '}
@@ -124,7 +139,10 @@ export default function Disclosure({
                 ) : (
                   <button
                     id="ok"
-                    onClick={() => onSubmit('ok')}
+                    onClick={() => {
+                      onSubmit('ok');
+                      setOpen(false);
+                    }}
                     className="h-12 flex items-center rounded-md py-2 px-4 m-0.5 disabled:opacity-50 bg-blue-700 hover:bg-blue-800 text-white"
                   >
                     <X className="flex lg:hidden lg:mr-3" />
