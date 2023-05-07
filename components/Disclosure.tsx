@@ -11,15 +11,26 @@ import {
   X,
 } from 'react-feather';
 
+import cn from 'classnames';
+
+import { Action } from '@/types/enums';
+
+const styles = {
+  actionBtn:
+    'h-10 flex items-center rounded-md py-1 px-2 m-0.5 lg:px-4 lg:border-2 disabled:opacity-50 disabled:bg-transparent hover:bg-gray-200',
+  primaryBtn:
+    'h-10 flex items-center rounded-md py-1  px-2 m-0.5 lg:px-6 disabled:opacity-50 bg-blue-700 hover:bg-blue-800 text-white',
+};
+
 export default function Disclosure({
   children,
-  disabledButtons,
+  disabledActionButtons,
   formAction,
   onSubmit,
   onCancel,
 }: {
   children: JSX.Element;
-  disabledButtons: boolean;
+  disabledActionButtons: boolean;
   formAction: string;
   onSubmit(e: string): void;
   onCancel(): void;
@@ -32,29 +43,39 @@ export default function Disclosure({
   };
 
   return (
-    <div className={`${open ? 'border  rounded-md shadow-md' : ''}`}>
+    <div
+      className={cn('w-full', `${open ? 'border  rounded-md shadow-md' : ''}`)}
+    >
       <>
         <div
           id="button"
           className="p-4 flex align-top justify-between"
-          onClick={() => setOpen(true)}
+          onClick={() => setOpen(!open)}
         >
           {children}
           {open && (
-            <img
-              className="w-7 h-7 rounded-2xl opacity-50 object-cover"
-              src="man_avatar.jpg"
-              width={8}
-              height={8}
-            />
+            <button
+              id="avatar"
+              name="avatar"
+              role="avatar"
+              disabled={disabledActionButtons}
+              className="disabled:opacity-50"
+            >
+              <img
+                className="w-7 h-7 rounded-2xl object-cover"
+                src="man_avatar.jpg"
+                width={8}
+                height={8}
+              />
+            </button>
           )}
         </div>
         {open ? (
           <div id="panel" className="w-full flex justify-between border-t p-2">
             <div id="buttons-container" className="flex">
               <button
-                className="h-12 flex justify-evenly items-center rounded-md py-2 px-4 m-0.5 mr-4 md:mr-8 disabled:opacity-50 disabled:bg-gray-100 bg-gray-100 hover:bg-gray-200"
-                disabled={disabledButtons}
+                className="h-10 flex justify-evenly items-center rounded-md py-2 px-4 m-0.5 mr-4 md:mr-8 disabled:opacity-50 disabled:bg-gray-100 bg-gray-100 hover:bg-gray-200"
+                disabled={disabledActionButtons}
               >
                 <Maximize2 className="lg:mr-3 text-gray-600" />{' '}
                 <span className="lg:flex hidden disable: text-gray-500 font-medium">
@@ -62,8 +83,8 @@ export default function Disclosure({
                 </span>
               </button>
               <button
-                className="h-12 flex justify-evenly items-center md:border-2 rounded-md py-2 px-4 m-0.5 disabled:opacity-50 disabled:bg-gray-100 hover:bg-gray-200"
-                disabled={disabledButtons}
+                className={styles.actionBtn}
+                disabled={disabledActionButtons}
               >
                 <Calendar className="lg:mr-3 text-gray-400" />
                 <span className="lg:flex hidden text-gray-400 font-medium">
@@ -71,8 +92,8 @@ export default function Disclosure({
                 </span>
               </button>
               <button
-                className="h-12 flex justify-evenly items-center md:border-2 rounded-md py-2 px-4 m-0.5 disabled:opacity-50 disabled:bg-gray-100 hover:bg-gray-200"
-                disabled={disabledButtons}
+                className={styles.actionBtn}
+                disabled={disabledActionButtons}
               >
                 <Unlock className="lg:mr-3 text-gray-400" />{' '}
                 <span className="lg:flex hidden text-gray-400 font-medium">
@@ -80,8 +101,8 @@ export default function Disclosure({
                 </span>
               </button>
               <button
-                className="h-12 flex justify-evenly items-center md:border-2 rounded-md py-2 px-4 m-0.5 disabled:opacity-50 disabled:bg-gray-100 hover:bg-gray-200"
-                disabled={disabledButtons}
+                className={styles.actionBtn}
+                disabled={disabledActionButtons}
               >
                 <Sun className="lg:mr-3 text-gray-400" />{' '}
                 <span className="lg:flex hidden text-gray-400 font-medium">
@@ -89,8 +110,8 @@ export default function Disclosure({
                 </span>
               </button>
               <button
-                className="h-12 flex justify-evenly items-center md:border-2 rounded-md py-2 px-4 m-0.5 disabled:opacity-50 disabled:bg-gray-100 hover:bg-gray-200"
-                disabled={disabledButtons}
+                className={styles.actionBtn}
+                disabled={disabledActionButtons}
               >
                 <Disc className="lg:mr-3 text-gray-400" />{' '}
                 <span className="lg:flex hidden text-gray-400 font-medium">
@@ -98,8 +119,8 @@ export default function Disclosure({
                 </span>
               </button>
               <button
-                className="h-12 flex justify-evenly items-center md:border-2 rounded-md py-2 px-4 m-0.5 disabled:opacity-50 disabled:bg-gray-100 hover:bg-gray-200"
-                disabled={disabledButtons}
+                className={styles.actionBtn}
+                disabled={disabledActionButtons}
               >
                 <Trash2 className="lg:mr-3 text-gray-400" />{' '}
                 <span className="lg:flex hidden text-gray-400 font-medium">
@@ -110,40 +131,40 @@ export default function Disclosure({
             <div className="flex">
               <button
                 onClick={handleCancel}
-                className="h-12 items-center  rounded-md py-2 px-4 m-0.5 disabled:opacity-50 bg-gray-100 hover:bg-gray-200 hidden lg:flex"
+                className="h-10 items-center  rounded-md py-2 px-4 m-0.5 lg:px-6 disabled:opacity-50 bg-gray-100 hover:bg-gray-200 hidden lg:flex"
               >
                 Cancel
               </button>
               <>
-                {formAction === 'save' ? (
+                {formAction === Action.SAVE ? (
                   <button
                     id="save"
-                    onClick={() => onSubmit('save')}
-                    className="h-12 flex items-center rounded-md py-2 px-4 m-0.5 disabled:opacity-50 bg-blue-700 hover:bg-blue-800 text-white"
+                    onClick={() => onSubmit(Action.SAVE)}
+                    className={styles.primaryBtn}
                   >
-                    <Save className="flex lg:hidden lg:mr-3" />{' '}
+                    <Save className="flex lg:hidden lg:mr-3" />
                     <span className="font-medium hidden lg:flex">Save</span>
                   </button>
-                ) : formAction === 'add' ? (
+                ) : formAction === Action.ADD ? (
                   <button
                     id="add"
                     onClick={() => {
-                      onSubmit('add');
+                      onSubmit(Action.ADD);
                       setOpen(false);
                     }}
-                    className="h-12 flex items-center rounded-md py-2 px-4 m-0.5 disabled:opacity-50 bg-blue-700 hover:bg-blue-800 text-white"
+                    className={styles.primaryBtn}
                   >
-                    <Plus className="flex lg:hidden  lg:mr-3" />{' '}
+                    <Plus className="flex lg:hidden  lg:mr-3" />
                     <span className="font-medium hidden lg:flex">Add</span>
                   </button>
                 ) : (
                   <button
                     id="ok"
                     onClick={() => {
-                      onSubmit('ok');
+                      onSubmit(Action.OK);
                       setOpen(false);
                     }}
-                    className="h-12 flex items-center rounded-md py-2 px-4 m-0.5 disabled:opacity-50 bg-blue-700 hover:bg-blue-800 text-white"
+                    className={styles.primaryBtn}
                   >
                     <X className="flex lg:hidden lg:mr-3" />
                     <span className="font-medium hidden lg:flex">Ok</span>

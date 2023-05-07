@@ -4,3 +4,9 @@ export enum Tag {
   EMAIL = 'email',
   LINK = 'link',
 }
+
+export enum Action {
+  OK = 'ok',
+  SAVE = 'save',
+  ADD = 'add',
+}
