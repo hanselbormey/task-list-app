@@ -1,13 +1,13 @@
 import cn from 'classnames';
 
 import { Task } from '@/types/task';
-import { getBgColor, getTag, getTextColor } from '../utils';
 import Chip from './Chip';
 import IconTag from './IconTag';
+import { getBgColor, getTag, getTextColor } from '../utils';
 
 const ListItem = ({ item }: { item: Task }) => {
   return (
-    <div className="flex items-center">
+    <div className="flex items-center p-0.5">
       <input type="checkbox" className="rounded-sm mr-2" />
       {item.body.split(' ').map((e, index) => {
         const tag = getTag(e);
@@ -15,7 +15,7 @@ const ListItem = ({ item }: { item: Task }) => {
           const textColor = getTextColor(tag);
           const bgColor = getBgColor(tag);
           return (
-            <Chip key={index} classname={cn(bgColor, textColor, 'py-0.5')}>
+            <Chip key={index} className={cn(bgColor, textColor, 'py-0.5')}>
               <IconTag tag={tag} label={e} />
             </Chip>
           );
