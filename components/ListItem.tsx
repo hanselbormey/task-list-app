@@ -7,7 +7,7 @@ import { getBgColor, getTag, getTextColor } from '../utils';
 
 const ListItem = ({ item }: { item: Task }) => {
   return (
-    <div className="flex items-center p-0.5">
+    <div className="flex items-center flex-wrap p-0.5">
       <input type="checkbox" className="rounded-sm mr-2" />
       {item.body.split(' ').map((e, index) => {
         const tag = getTag(e);
