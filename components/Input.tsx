@@ -48,6 +48,7 @@ export default function Input({
         if (!placeholder) {
           const span = document.createElement('SPAN');
           span.id = 'placeholder';
+          span.role = 'placeholder';
           span.innerText = 'Type to add new task';
           span.style['opacity'] = '25%';
           div.append(span);
@@ -65,16 +66,18 @@ export default function Input({
   }, []);
 
   return (
-    <div className="flex">
+    <div className="flex overflow-hidden">
       <PlusSquare className="text-blue-500 w-6 h-6 mr-2" />
       <div className="relative">
         <div
           id="div"
+          role="output"
           className="flex w-full items-center flex-wrap overflow-hidden min-h-[24px]"
         ></div>
         <div
           className="border-none outline-none w-full text-transparent bg-transparent caret-black absolute top-0"
           id="input"
+          role="input"
           contentEditable
           spellCheck={false}
           onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
