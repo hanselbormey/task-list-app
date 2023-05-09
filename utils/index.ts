@@ -1,4 +1,4 @@
-import { Tag } from '@/types/enums';
+import { Action, Tag } from '@/types/enums';
 import { BG_COLOR, COLOR, TXT_COLOR } from './constants';
 
 export const regexps = {
@@ -56,4 +56,11 @@ export function getInnerHtml(value: string) {
     .map((item) => convertToHtml(item));
 
   return valueToList.join('&nbsp;');
+}
+
+export function getCurrentFormAction(initValue: string, lastValue: string) {
+  let result = Action.SAVE;
+  if (initValue === lastValue || lastValue === '') result = Action.OK;
+  if (!initValue && lastValue) result = Action.ADD;
+  return result;
 }
