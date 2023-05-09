@@ -6,6 +6,7 @@ import Disclosure from '@/components/Disclosure';
 import { DataList } from '@/utils/mockData';
 import { Task } from '@/types/task';
 import { Action } from '@/types/enums';
+import { getCurrentFormAction } from '@/utils/index';
 
 export default function Home() {
   const [value, setValue] = useState<string>('');
@@ -17,20 +18,13 @@ export default function Home() {
 
   useEffect(() => {
     value ? setDisabledButtons(false) : setDisabledButtons(true);
-    const act = getCurrentFormAction();
+    const act = getCurrentFormAction(initialValue, value);
     setAction(act);
   }, [value]);
 
   useEffect(() => {
     setInitialValue(value);
   }, []);
-
-  const getCurrentFormAction = () => {
-    let result = 'save';
-    if (initialValue === value || value === '') result = 'ok';
-    if (!initialValue && value) result = 'add';
-    return result;
-  };
 
   const addItem = (value: string) => {
     const arr: Task[] = [...dataList];
