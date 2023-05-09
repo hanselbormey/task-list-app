@@ -49,6 +49,7 @@ export default function Disclosure({
       <>
         <div
           id="button"
+          role="open-disclosure"
           className="p-4 flex align-top justify-between"
           onClick={() => setOpen(!open)}
         >
@@ -59,7 +60,7 @@ export default function Disclosure({
               name="avatar"
               role="avatar"
               disabled={disabledActionButtons}
-              className="disabled:opacity-50"
+              className="disabled:opacity-50 flex flex-shrink-0"
             >
               <img
                 className="w-7 h-7 rounded-2xl object-cover"
@@ -71,9 +72,15 @@ export default function Disclosure({
           )}
         </div>
         {open ? (
-          <div id="panel" className="w-full flex justify-between border-t p-2">
+          <div
+            id="toolbar"
+            role="toolbar"
+            aria-label="toolbar"
+            className="w-full flex justify-between border-t p-2"
+          >
             <div id="buttons-container" className="flex">
               <button
+                name="open"
                 className="h-10 flex justify-evenly items-center rounded-md py-2 px-4 m-0.5 mr-4 md:mr-8 disabled:opacity-50 disabled:bg-gray-100 bg-gray-100 hover:bg-gray-200"
                 disabled={disabledActionButtons}
               >
