@@ -107,7 +107,7 @@ describe('Home', () => {
     expect(addBtn).not.toBeNull();
   });
 
-  it('Cancel button should close toolbar and remove the current input value', async () => {
+  it('Cancel button should close toolbar and clear the current input value', async () => {
     render(<Home />);
 
     userEvent.click(screen.getByRole('open-disclosure'));
@@ -125,7 +125,29 @@ describe('Home', () => {
     expect(screen.getByRole('input')).not.toBeEmptyDOMElement();
   });
 
-  it('Add button should close toolbar and add the current input value', async () => {
+  it('Ok button should add an item with a default text and close toolbar ', async () => {
+    render(<Home />);
+
+    userEvent.click(screen.getByRole('open-disclosure'));
+
+    expect(await screen.findByRole('toolbar')).not.toBeNull();
+
+    fireEvent.click(await screen.findByRole('button', { name: /Ok/ }));
+
+    expect(screen.queryByRole('toolbar')).toBeNull();
+
+    const { container } = render(
+      <ListItem
+        item={{ id: Math.random().toString(), body: 'New task to do' }}
+      />
+    );
+
+    expect(screen.getByRole('input')).toBeEmptyDOMElement();
+
+    expect(container).toBeInTheDocument();
+  });
+
+  it('Add button should add an item and close toolbar ', async () => {
     render(<Home />);
 
     userEvent.click(screen.getByRole('open-disclosure'));
@@ -136,7 +158,7 @@ describe('Home', () => {
       target: { textContent: 'Do the landing page' },
     });
 
-    fireEvent.click(await screen.findByRole('button', { name: /Add/ }));
+    fireEvent.click(screen.getByRole('button', { name: /Add/ }));
 
     expect(screen.queryByRole('toolbar')).toBeNull();
 
@@ -146,7 +168,7 @@ describe('Home', () => {
       />
     );
 
-    expect(screen.getByRole('input')).not.toBeEmptyDOMElement();
+    expect(screen.queryByRole('placeholder')).toBeInTheDocument();
 
     expect(container).toBeInTheDocument();
   });
