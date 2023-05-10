@@ -48,7 +48,7 @@ export default function Input({
         if (!placeholder) {
           const span = document.createElement('SPAN');
           span.id = 'placeholder';
-          span.role = 'placeholder';
+          span.setAttribute('role', 'placeholder');
           span.innerText = 'Type to add new task';
           span.style['opacity'] = '25%';
           div.append(span);
