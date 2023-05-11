@@ -1,10 +1,12 @@
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Home from '@/pages/index';
 import Disclosure from '@/components/Disclosure';
 import Input from '@/components/Input';
 import { getCurrentFormAction } from '../utils';
-import ListItem from '@/components/ListItem';
+import AddTasks from '@/components/AddTasks';
+import List from '@/components/List';
+import { Task } from '@/types/task';
+import { DataList } from '@/utils/mockData';
 
 afterEach(cleanup);
 
@@ -58,7 +60,7 @@ describe('Home', () => {
   });
 
   it('toolbar buttons should be enabled if you type something', async () => {
-    render(<Home />);
+    render(<AddTasks onAdd={() => {}} />);
 
     userEvent.click(screen.getByRole('open-disclosure'));
 
@@ -84,7 +86,7 @@ describe('Home', () => {
   });
 
   it('Ok button is shown when you open disclosure and there is no input value', async () => {
-    render(<Home />);
+    render(<AddTasks onAdd={() => {}} />);
 
     userEvent.click(screen.getByRole('open-disclosure'));
 
@@ -94,7 +96,7 @@ describe('Home', () => {
   });
 
   it('Add button is shown when you open disclosure and type some value', async () => {
-    render(<Home />);
+    render(<AddTasks onAdd={() => {}} />);
 
     userEvent.click(screen.getByRole('open-disclosure'));
 
@@ -108,7 +110,7 @@ describe('Home', () => {
   });
 
   it('Cancel button should close toolbar and clear the current input value', async () => {
-    render(<Home />);
+    render(<AddTasks onAdd={() => {}} />);
 
     userEvent.click(screen.getByRole('open-disclosure'));
 
@@ -126,7 +128,13 @@ describe('Home', () => {
   });
 
   it('Ok button should add an item with a default text and close toolbar ', async () => {
-    render(<Home />);
+    const items: Task[] = DataList;
+
+    const handleAdd = (item: string) => {
+      items.unshift({ id: Math.random().toString(), body: item });
+    };
+
+    render(<AddTasks onAdd={handleAdd} />);
 
     userEvent.click(screen.getByRole('open-disclosure'));
 
@@ -136,19 +144,19 @@ describe('Home', () => {
 
     expect(screen.queryByRole('toolbar')).toBeNull();
 
-    const { container } = render(
-      <ListItem
-        item={{ id: Math.random().toString(), body: 'New task to do' }}
-      />
-    );
+    render(<List data={items} />);
 
-    expect(screen.getByRole('input')).toBeEmptyDOMElement();
-
-    expect(container).toBeInTheDocument();
+    expect(await screen.findAllByRole('list-item')).toHaveLength(4);
   });
 
   it('Add button should add an item and close toolbar ', async () => {
-    render(<Home />);
+    const items: Task[] = DataList;
+
+    const handleAdd = (item: string) => {
+      items.unshift({ id: Math.random().toString(), body: item });
+    };
+
+    render(<AddTasks onAdd={handleAdd} />);
 
     userEvent.click(screen.getByRole('open-disclosure'));
 
@@ -162,14 +170,8 @@ describe('Home', () => {
 
     expect(screen.queryByRole('toolbar')).toBeNull();
 
-    const { container } = render(
-      <ListItem
-        item={{ id: Math.random().toString(), body: 'Do the landing page' }}
-      />
-    );
+    render(<List data={items} />);
 
-    expect(screen.queryByRole('placeholder')).toBeInTheDocument();
-
-    expect(container).toBeInTheDocument();
+    expect(await screen.findAllByRole('list-item')).toHaveLength(5);
   });
 });

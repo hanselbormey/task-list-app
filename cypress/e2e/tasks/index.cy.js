@@ -6,21 +6,25 @@ describe('tasks', () => {
 
   it('Test ok button', () => {
     cy.visit('/');
-    cy.get('div[role="open-disclosure"]').click();
+    cy.get('div[role="add-task"] div[role="open-disclosure"]').click();
     cy.get('button[id="ok"]').click();
+    cy.get('li[role="list-item"] div[role="open-disclosure"]').should(
+      'have.length',
+      4
+    );
   });
 
   it('Test add button', () => {
-    // We use the `cy.get()` command to get all elements that match the selector.
-    // Then, we use `should` to assert that there are two matched items,
-    // which are the two default items.
-    //cy.get('.todo-list li').should('have.length', 2);
     cy.visit('/');
-    cy.get('div[role="open-disclosure"]').click();
+    cy.get('div[role="add-task"] div[role="open-disclosure"]').click();
     cy.get('div[role="input"]').focus();
     cy.get('div[role="input"]').type(
       '@natasha should do the landing page #important'
     );
     cy.get('button[id="add"]').click();
+    cy.get('li[role="list-item"] div[role="open-disclosure"]').should(
+      'have.length',
+      4
+    );
   });
 });
