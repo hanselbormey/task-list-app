@@ -33,13 +33,13 @@ export default function Disclosure({
   disabledActionButtons: boolean;
   formAction: string;
   onSubmit(e: string): void;
-  onCancel(): void;
+  onCancel?(): void;
 }) {
   const [open, setOpen] = useState<boolean>(false);
 
   const handleCancel = () => {
     setOpen(false);
-    onCancel();
+    onCancel ? onCancel() : null;
   };
 
   return (
@@ -50,7 +50,10 @@ export default function Disclosure({
         <div
           id="button"
           role="open-disclosure"
-          className="p-4 flex align-top justify-between"
+          className={cn(
+            'flex align-top justify-between',
+            `${open ? 'p-4' : ''}`
+          )}
           onClick={() => setOpen(!open)}
         >
           {children}
