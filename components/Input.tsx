@@ -84,7 +84,6 @@ export default function Input({
           className="border-none outline-none w-full text-transparent bg-transparent caret-black absolute top-0"
           id={inputDiv}
           role="input"
-          data-text="Enter text here"
           contentEditable
           spellCheck={false}
           onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
