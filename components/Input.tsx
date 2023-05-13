@@ -73,7 +73,7 @@ export default function Input({
   }, []);
 
   return (
-    <div className="flex overflow-hidden w-[200px] sm:w-full md:w-full">
+    <div className="flex overflow-hidden">
       <div className="relative">
         <div
           id={outputDiv}

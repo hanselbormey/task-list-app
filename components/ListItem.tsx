@@ -35,7 +35,7 @@ const ListItem = ({ item }: { item: Task }) => {
   return (
     <div
       className={cn(
-        'flex items-center',
+        'flex items-center w-full',
         `${!open ? 'flex-wrap' : 'flex-nowrap'}`
       )}
       onClick={() => setOpen(!open)}
