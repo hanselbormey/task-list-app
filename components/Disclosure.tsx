@@ -17,7 +17,7 @@ import { Action } from '@/types/enums';
 
 const styles = {
   actionBtn:
-    'h-10 flex items-center rounded-md py-1 px-1 m-0.5 lg:px-4 lg:border-2 disabled:opacity-50 disabled:bg-transparent hover:bg-gray-200',
+    'h-10 flex items-center rounded-md py-1 px-1 m-0.5 md:px-4 lg:border-2 disabled:opacity-50 disabled:bg-transparent hover:bg-gray-200',
   primaryBtn:
     'h-10 flex items-center rounded-md py-1 px-2 m-0.5 lg:px-6 disabled:opacity-50 bg-blue-700 hover:bg-blue-800 text-white',
 };
@@ -51,12 +51,12 @@ export default function Disclosure({
           id="button"
           role="open-disclosure"
           className={cn(
-            'flex align-top justify-between',
+            'flex justify-center align-top w-full',
             `${open ? 'p-4' : ''}`
           )}
           onClick={() => setOpen(!open)}
         >
-          {children}
+          <div className="flex w-full">{children}</div>
           {open && (
             <button
               id="avatar"

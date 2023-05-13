@@ -39,14 +39,14 @@ const AddTasks = ({ onAdd }: { onAdd(item: string): void }) => {
         onSubmit={handleSubmit}
         onCancel={() => setValue('')}
       >
-        <div className="flex">
-          <PlusSquare className="text-blue-500 w-6 h-6 mr-2" />
+        <>
+          <PlusSquare className="text-blue-500 w-4 h-4 md:w-6 md:h-6 mr-2 flex flex-shrink-0" />
           <Input
             id="addInput"
             value={value}
             onChange={(val) => setValue(val)}
           />
-        </div>
+        </>
       </Disclosure>
     </div>
   );
